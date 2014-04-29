@@ -1,0 +1,10 @@
+# gitignore for looking glass
+
+local.properties
+.idea/
+assets/
+bin/
+out/
+libs/
+gen/
+
