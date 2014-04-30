@@ -37,6 +37,7 @@ public abstract class BaseMainActivity extends Activity {
                 .put(RoomType.FrontPorch, "Samsung")
                 .put(RoomType.Kitchen, "Moto")
                 .put(RoomType.Hand, "samsung")
+                .put(RoomType.LivingRoom, "Acer")
                 .build();
     }
 

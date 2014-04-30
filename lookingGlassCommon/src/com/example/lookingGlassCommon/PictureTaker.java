@@ -118,11 +118,11 @@ public class PictureTaker {
         }
 
         SurfaceHolder holder = surfaceView.getHolder();
-        if (holder.getSurface().isValid()) {
+        // if (holder.getSurface().isValid()) {
             snap(base64future, holder);
-        } else {
+        /*} else {
             Log.e(TAG,"Surface is bad");
-        }
+        }*/
 
         return base64future;
     }
