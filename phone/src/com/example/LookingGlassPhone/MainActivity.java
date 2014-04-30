@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main);
         TestLibProject.test();
         WebView wv = (WebView)this.findViewById(R.id.webview);
-        wv.loadUrl("index.html");
+        wv.loadUrl("file:///android_asset/index.html");
         WebBridge webBridge = new WebBridge(this, wv, new WebBridge.ReceiveImageCallback() {
             @Override
             public void onReceiveImage(String base64Image) {
