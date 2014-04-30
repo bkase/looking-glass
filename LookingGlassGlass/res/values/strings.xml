@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">LookingGlassGlass</string>
+    <string name="front_porch">Front Porch</string>
+    <string name="kitchen">Kitchen</string>
+    <string name="look_through">Look Through</string>
 </resources>
