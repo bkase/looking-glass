@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
 
         mWebView = (WebView)this.findViewById(R.id.webview);
         mWebView.loadUrl("file:///android_asset/index.html");
-        WebBridge webBridge = new WebBridge(this, mWebView, mPictureTaker);
+        WebBridge webBridge = new WebBridge(this, mWebView, mPictureTaker, null, null);
 
 
 //        Futures.addCallback(mPictureTaker.snapBase64(), new FutureCallback<String>() {

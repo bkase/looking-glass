@@ -4,14 +4,17 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
         >
+    <ImageView android:id="@+id/imageview"
+               android:layout_width="fill_parent"
+               android:layout_height="fill_parent"/>
     <TextView
             android:id="@+id/roomname"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text=""
             />
-    <ImageView android:id="@+id/imageview"
-               android:layout_width="fill_parent"
-               android:layout_height="fill_parent"/>
+    <WebView android:id="@+id/webview"
+            android:layout_width="1px"
+            android:layout_height="1px" />
 </RelativeLayout>
 

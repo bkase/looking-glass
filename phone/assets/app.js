@@ -5,7 +5,7 @@ window.onload = function(){
 }
 
 function connect(){
-  Cloasis.hostport = ['hkr.me', 32200];
+  Cloasis.hostport = ['evanshapi.ro', 32200];
   Cloasis.registerUser('evan', 'arst', function(err, session){
     console.log('ru');
     if (err) {
@@ -29,7 +29,7 @@ function onLogin(session) {
 
   var takePhotoSpec = { 
     username: 'evan', 
-    namespace: 'evan.' + "JSInterface.getDevice()" + '.takePhoto', 
+    namespace: 'evan.' + JSInterface.getDevice() + '.takePhoto', 
     name: "takePhoto", 
     version: 0.1,
     description: "takes a photo",
@@ -55,7 +55,7 @@ function onLogin(session) {
         if (err){
           console.log(JSON.stringify(err));
         }
-        console.log('ready');
+        console.log('ready with ' + JSON.stringify(takePhotoId));
       });
     });
   });

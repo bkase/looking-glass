@@ -13,7 +13,7 @@ public class RenderPicture {
 
     public static void render(ImageView view, String base64) {
         Log.d(TAG, "Base64 image got");
-        byte[] imageAsBytes = Base64.decode(base64, Base64.DEFAULT);
+        byte[] imageAsBytes = Base64.decode(base64, Base64.NO_WRAP);
         Log.d(TAG, "got bytes");
         view.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length));
         Log.d(TAG, "setImage");
