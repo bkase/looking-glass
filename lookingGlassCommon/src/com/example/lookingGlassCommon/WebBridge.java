@@ -43,10 +43,7 @@ public class WebBridge {
         }
     }
 
-    public void sendImage(Bitmap bm){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.PNG, 100, baos); //bm is the bitmap object
-        String encodedImage = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
-        wv.loadUrl("javascript:getImage('" + encodedImage + "')");
+    public void sendImage(String base64image){
+        wv.loadUrl("javascript:getImage('" + base64image + "')");
     }
 }
