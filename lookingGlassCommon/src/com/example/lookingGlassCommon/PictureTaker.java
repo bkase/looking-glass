@@ -14,6 +14,7 @@ import com.google.common.util.concurrent.SettableFuture;
 public class PictureTaker {
     public final static String TAG = PictureTaker.class.getName();
     public Camera mCamera;
+    private final SurfaceView surfaceView;
 
     public void openCamera() {
         try {
@@ -27,7 +28,8 @@ public class PictureTaker {
         }
     }
 
-    public PictureTaker() {
+    public PictureTaker(SurfaceView surfaceView) {
+        this.surfaceView = surfaceView;
         openCamera();
     }
 
@@ -45,7 +47,7 @@ public class PictureTaker {
                 public void onPictureTaken(byte[] bytes, Camera camera) {
                     Log.d(TAG, "Pic taken, ");
                     camera.unlock();
-                    base64future.set(Base64.encodeToString(bytes, Base64.DEFAULT));
+                    base64future.set(Base64.encodeToString(bytes, Base64.NO_WRAP));
                 }
             });
         } catch (Exception e) {
@@ -55,7 +57,7 @@ public class PictureTaker {
         }
     }
 
-    public ListenableFuture<String> snapBase64(SurfaceView surfaceView) {
+    public ListenableFuture<String> snapBase64() {
         final SettableFuture<String> base64future = SettableFuture.create();
 
         Log.d(TAG, "Starting snapBase64");

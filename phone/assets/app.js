@@ -1,5 +1,6 @@
 
 window.onload = function(){
+  console.log('start');
   connect();
 }
 
@@ -22,7 +23,8 @@ function connect(){
 
 function onLogin(session) {
   session.on('close', function(){
-    connect();
+    console.log('close');
+    //connect();
   });
 
   var takePhotoSpec = { 
@@ -46,17 +48,20 @@ function onLogin(session) {
     if (err){
       console.log(JSON.stringify(err));
     }
-    session.activate({ fn: takePhoto, apiIdentifier: takePhotoId }, function(err){
-      if (err){
+    session.deactivate(takePhotoId, function(err){
+      if (err)
         console.log(JSON.stringify(err));
-        throw err;
-      }
-      console.log('ready');
+      session.activate({ fn: takePhoto, apiIdentifier: takePhotoId }, function(err){
+        if (err){
+          console.log(JSON.stringify(err));
+        }
+        console.log('ready');
+      });
     });
   });
 }
 
-window.getImage = function(callbackId, base64){
+window.onGotImage = function(callbackId, base64){
   console.log('got image!', base64.length);
   callbacks[callbackId]({ "img": base64, timestamp: Date.now() });
   delete callbacks[callbackId];
