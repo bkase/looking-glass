@@ -29,5 +29,23 @@
                     android:name="com.google.android.glass.VoiceTrigger"
                     android:resource="@xml/look_through_trigger" />
         </activity>
+        <activity android:name=".HandActivity"
+                  android:label="@string/hand">
+            <intent-filter>
+                <action android:name="com.google.android.glass.action.VOICE_TRIGGER"/>
+            </intent-filter>
+            <meta-data
+                    android:name="com.google.android.glass.VoiceTrigger"
+                    android:resource="@xml/look_through_trigger" />
+        </activity>
+        <activity android:name=".LivingRoomActivity"
+                  android:label="@string/living_room">
+            <intent-filter>
+                <action android:name="com.google.android.glass.action.VOICE_TRIGGER"/>
+            </intent-filter>
+            <meta-data
+                    android:name="com.google.android.glass.VoiceTrigger"
+                    android:resource="@xml/look_through_trigger" />
+        </activity>
     </application>
 </manifest> 

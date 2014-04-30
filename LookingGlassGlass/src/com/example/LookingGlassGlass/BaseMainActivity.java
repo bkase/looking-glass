@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
+import android.util.Log;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,8 +34,9 @@ public abstract class BaseMainActivity extends Activity {
     private static final Map<RoomType, String> roomToDevice;
     static {
         roomToDevice = ImmutableMap.<RoomType, String>builder()
-                .put(RoomType.FrontPorch, "samsung")
+                .put(RoomType.FrontPorch, "Samsung")
                 .put(RoomType.Kitchen, "Moto")
+                .put(RoomType.Hand, "samsung")
                 .build();
     }
 
@@ -83,13 +85,15 @@ public abstract class BaseMainActivity extends Activity {
 
     @Override
     public void onPause() {
+        Log.d(TAG, "onPause starting");
         mWebView.clearHistory();
         mWebView.loadUrl("about:blank");
         mWebView.freeMemory();
-        mWebView.pauseTimers();
+        mWebView.clearCache(true);
         mWebView = null;
         mWakeLock.release();
         finish();
+        Log.d(TAG, "onPause ending");
         super.onPause();
     }
 }

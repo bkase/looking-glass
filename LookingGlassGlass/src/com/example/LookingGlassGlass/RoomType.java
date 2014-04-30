@@ -5,5 +5,7 @@ package com.example.LookingGlassGlass;
  */
 public enum RoomType {
     Kitchen,
-    FrontPorch
+    FrontPorch,
+    Hand,
+    LivingRoom,
 }

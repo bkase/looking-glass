@@ -5,6 +5,7 @@ window.onload = function(){
 }
 
 function connect(){
+  console.log('connecting');
   Cloasis.hostport = ['evanshapi.ro', 32200];
   Cloasis.registerUser('evan', 'arst', function(err, session){
     console.log('ru');
@@ -71,6 +72,7 @@ var callbackId = 0;
 var callbacks = {};
 
 function takePhoto(input, done){
+  console.log("Got a take photo request: " + callbackId);
   callbacks[callbackId] = done;
   JSInterface.takePhoto(callbackId++);
 }

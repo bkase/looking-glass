@@ -57,14 +57,16 @@ public class MainActivity extends Activity {
 
     @Override
     public void onPause() {
+        Log.d(TAG, "onPause starting");
         mWebView.clearHistory();
         mWebView.loadUrl("about:blank");
         mWebView.freeMemory();
-        mWebView.pauseTimers();
+        mWebView.clearCache(true);
         mWebView = null;
         mPictureTaker.release();
         finish();
         mWakeLock.release();
+        Log.d(TAG, "onPause ending");
         super.onPause();
     }
 }

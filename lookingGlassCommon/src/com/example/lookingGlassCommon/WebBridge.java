@@ -23,12 +23,15 @@ public class WebBridge {
 
     private final Handler handler;
 
+    private final UIExecutor uiExecutor;
+
     public static final String TAG = WebBridge.class.getName();
 
     public WebBridge(Activity activity, WebView wv, PictureTaker picTaker, ImageView imgView, Callback callback){
         this.wv = wv;
 
         handler = new Handler();
+        uiExecutor = new UIExecutor(handler);
 
         this.wv.setWebChromeClient(new WebChromeClient() {
             @Override
@@ -86,7 +89,7 @@ public class WebBridge {
                 public void onFailure(Throwable throwable) {
                     System.out.println(throwable.getMessage());
                 }
-            });
+            }, uiExecutor);
         }
 
         public String getDevice(){
