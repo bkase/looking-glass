@@ -3,6 +3,7 @@ package com.example.LookingGlassPhone;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.webkit.WebView;
@@ -17,6 +18,8 @@ public class MainActivity extends Activity {
 
     private PictureTaker mPictureTaker;
 
+    private PowerManager.WakeLock mWakeLock;
+
     /**
      * Called when the activity is first created.
      */
@@ -25,6 +28,11 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         TestLibProject.test();
+
+        PowerManager pm = (PowerManager)getSystemService(POWER_SERVICE);
+        mWakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, TAG);
+        mWakeLock.acquire();
+
         WebView wv = (WebView)this.findViewById(R.id.webview);
         wv.loadUrl("file:///android_asset/index.html");
         WebBridge webBridge = new WebBridge(this, wv, new WebBridge.ReceiveImageCallback() {
@@ -55,6 +63,7 @@ public class MainActivity extends Activity {
     public void onPause() {
         mPictureTaker.release();
         finish();
+        mWakeLock.release();
         super.onPause();
     }
 }
