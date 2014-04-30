@@ -2,10 +2,11 @@ package com.example.LookingGlassPhone;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.webkit.WebView;
-import com.example.lookingGlassCommon.TakePicture;
+import com.example.lookingGlassCommon.PictureTaker;
 import com.example.lookingGlassCommon.TestLibProject;
 import com.example.lookingGlassCommon.WebBridge;
 import com.google.common.util.concurrent.FutureCallback;
@@ -13,6 +14,8 @@ import com.google.common.util.concurrent.Futures;
 
 public class MainActivity extends Activity {
     public final String TAG = getClass().getName();
+
+    private PictureTaker mPictureTaker;
 
     /**
      * Called when the activity is first created.
@@ -31,10 +34,14 @@ public class MainActivity extends Activity {
             }
         });
 
-        Futures.addCallback(TakePicture.getBase64((SurfaceView)findViewById(R.id.surface)), new FutureCallback<String>() {
+        mPictureTaker = new PictureTaker();
+
+        final Handler handler = new Handler();
+
+        Futures.addCallback(mPictureTaker.snapBase64((SurfaceView) findViewById(R.id.surface)), new FutureCallback<String>() {
             @Override
-            public void onSuccess(String s) {
-                Log.d(TAG, "len:" + s.length());
+            public void onSuccess(String base64) {
+                Log.d(TAG, "Base64 image got, " + base64.length());
             }
 
             @Override
@@ -42,5 +49,12 @@ public class MainActivity extends Activity {
                 Log.d(TAG, "Failed with " + throwable.toString());
             }
         });
+    }
+
+    @Override
+    public void onPause() {
+        mPictureTaker.release();
+        finish();
+        super.onPause();
     }
 }
