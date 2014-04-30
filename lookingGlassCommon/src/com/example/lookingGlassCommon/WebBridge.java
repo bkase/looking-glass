@@ -6,7 +6,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.util.Base64;
+import android.util.Log;
+import android.webkit.ConsoleMessage;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
 import java.io.ByteArrayOutputStream;
@@ -20,6 +24,17 @@ public class WebBridge {
 
     public WebBridge(Activity activity, WebView wv, ReceiveImageCallback receiveImageCallback){
         this.wv = wv;
+
+        this.wv.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public boolean onConsoleMessage(ConsoleMessage cm)
+            {
+                Log.d("ConsoleMessage", String.format("%s @ %d: %s",
+                        cm.message(), cm.lineNumber(), cm.sourceId()));
+                return true;
+            }
+        });
+
         this.receiveImageCallback = receiveImageCallback;
         JavaScriptInterface jsInterface = new JavaScriptInterface(activity);
         wv.getSettings().setJavaScriptEnabled(true);
@@ -40,6 +55,9 @@ public class WebBridge {
 
         public void onReceiveImage(String base64Image){
             receiveImageCallback.onReceiveImage(base64Image);
+        }
+        public String getDevice(){
+            return (Build.MANUFACTURER + "_" + Build.PRODUCT).replaceAll("\\.", ",");
         }
     }
 
