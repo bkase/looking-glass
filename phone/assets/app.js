@@ -5,7 +5,7 @@ window.onload = function(){
 }
 
 function connect(){
-  Cloasis.hostport = ['evanshapi.ro', 32200];
+  Cloasis.hostport = ['hkr.me', 32200];
   Cloasis.registerUser('evan', 'arst', function(err, session){
     console.log('ru');
     if (err) {
