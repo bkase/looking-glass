@@ -20,6 +20,8 @@ public class MainActivity extends Activity {
 
     private PowerManager.WakeLock mWakeLock;
 
+    private WebView mWebView;
+
     /**
      * Called when the activity is first created.
      */
@@ -33,9 +35,9 @@ public class MainActivity extends Activity {
         mWakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, TAG);
         mWakeLock.acquire();
 
-        WebView wv = (WebView)this.findViewById(R.id.webview);
-        wv.loadUrl("file:///android_asset/index.html");
-        WebBridge webBridge = new WebBridge(this, wv, new WebBridge.ReceiveImageCallback() {
+        mWebView = (WebView)this.findViewById(R.id.webview);
+        mWebView.loadUrl("file:///android_asset/index.html");
+        WebBridge webBridge = new WebBridge(this, mWebView, new WebBridge.ReceiveImageCallback() {
             @Override
             public void onReceiveImage(String base64Image) {
                 System.out.println("got image "  + base64Image);
@@ -61,6 +63,11 @@ public class MainActivity extends Activity {
 
     @Override
     public void onPause() {
+        mWebView.clearHistory();
+        mWebView.loadUrl("about:blank");
+        mWebView.freeMemory();
+        mWebView.pauseTimers();
+        mWebView = null;
         mPictureTaker.release();
         finish();
         mWakeLock.release();
