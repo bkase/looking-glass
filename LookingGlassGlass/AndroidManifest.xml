@@ -8,7 +8,7 @@
 
     <uses-sdk android:minSdkVersion="15"/>
     <application android:label="@string/app_name">
-        <activity android:name=".MainActivity"
+        <activity android:name=".FrontPorchActivity"
                   android:label="@string/front_porch">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -18,7 +18,7 @@
                     android:name="com.google.android.glass.VoiceTrigger"
                     android:resource="@xml/look_through_trigger" />
         </activity>
-        <activity android:name=".OtherActivity"
+        <activity android:name=".KitchenActivity"
                   android:label="@string/kitchen">
             <intent-filter>
                 <action android:name="com.google.android.glass.action.VOICE_TRIGGER"/>
